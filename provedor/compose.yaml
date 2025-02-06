@@ -45,7 +45,7 @@ services:
       - "587:587/tcp"
       - "110:110/tcp"
       - "143:143/tcp"
-      - "465:465/tcp" # Adicione esta linha para permitir conexões seguras na porta 465
+      - "465:465/tcp"
     networks:
       - praia-net
     volumes:
@@ -53,7 +53,6 @@ services:
       - ./mail/conf/dovecot.conf:/etc/dovecot/dovecot.conf
       - ./mail/conf/10-master.conf:/etc/dovecot/conf.d/10-master.conf
       - ./mail/data:/home
-      - ./mail/ssl:/etc/dovecot/ssl
 
   webmail:
     image: roundcube/roundcubemail:latest
@@ -68,7 +67,6 @@ services:
       - email
     volumes:
       - ./webmail/conf/config.inc.php:/var/roundcube/config/config.inc.php
-      - ./mail/conf/ssl/email.crt:/etc/ssl/certs/email.crt:ro
 
   ssh:
     build:
