@@ -7,14 +7,8 @@
 //include "/etc/bind/zones.rfc1918";
 
 
-zone "rafael.asa.br"{
+zone "pipa.com"{
     type master;
-    file "/etc/bind/db.asa.br";
-    allow-transfer{ any; };
-};
-
-zone "rafael.bind.br"{
-    type master;
-    file "/etc/bind/db.bind.br";
+    file "/etc/bind/db.pipa.com";
     allow-transfer{ any; };
 };

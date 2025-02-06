@@ -4,15 +4,14 @@
 ![Git](https://img.shields.io/badge/Git-Branch%20Main-green)
 
 Projeto desenvolvido em 3 sprints para simular os serviços de um provedor de conteúdo usando Docker, incluindo DNS, servidores web, e-mail, proxy reverso e acesso remoto.
-
 ---
 
 ## 📋 Descrição do Projeto
 
-O **ASA-CLOUD** é uma infraestrutura como código (IaC) que replica os principais serviços de um provedor de internet, organizada em três `docker-compose.yml`:
-1. **Provedor**: Serviços base (DNS, Proxy, E-mail).
-2. **Cliente 1**: Hospedagem web personalizada.
-3. **Cliente 2**: Hospedagem web adicional com configurações específicas.
+O **ASA-CLOUD** é uma infraestrutura como código (IaC) que replica os principais serviços de um provedor de internet, organizada em três `compose.yaml`:
+1. **Provedor**: Serviços base (DNS, Proxy, E-mail, WebMail, SSH).
+2. **Cliente 1**: Hospedagem web personalizada, SSH, Proxy.
+3. **Cliente 2**: Hospedagem web personalizada, SSH, Proxy.
 
 **Objetivo**: Implementar uma arquitetura escalável e replicável para serviços de rede, seguindo práticas DevOps.
 
@@ -22,7 +21,7 @@ O **ASA-CLOUD** é uma infraestrutura como código (IaC) que replica os principa
 
 | Serviço              | Tecnologia       | Descrição                                  |
 |----------------------|------------------|--------------------------------------------|
-| **DNS**              | Bind9            | Zonas DNS para provedor e clientes (ex: `pipa.asa.br`) |
+| **DNS**              | Bind9            | Zonas DNS para provedor e clientes (ex: `pipa.com`) |
 | **Proxy Reverso**    | NGINX            | HTTPS com certificados autoassinados       |
 | **Servidor Web**     | WordPress        | CMS oficial em containers Docker           |
 | **E-mail**           | Postfix/Dovecot  | Serviços SMTP/IMAP                         |
@@ -36,7 +35,7 @@ O **ASA-CLOUD** é uma infraestrutura como código (IaC) que replica os principa
 ### Gerais
 - Repositório Git único na branch `main`.
 - Persistência de dados via volumes Docker.
-- 3 arquivos `docker-compose.yml` (provedor, cliente1, cliente2).
+- 3 arquivos `compose.yaml` (provedor, cliente1, cliente2).
 
 ### Específicos
 - **DNS**:
@@ -52,19 +51,46 @@ O **ASA-CLOUD** é uma infraestrutura como código (IaC) que replica os principa
 
 ---
 
-## 🏗 Arquitetura
+## 🏗 Arquitetura atual (será atualizada conforme o andamento das sprints)
 
 ```
 Projeto_ASA
-├── provedor/
-│ ├── docker-compose.yml (DNS, Proxy, E-mail)
-│ └── volumes/ (dados persistentes)
-├── cliente1/
-│ ├── docker-compose.yml (Web1, Web2, SSH)
-│ └── volumes/
-├── cliente2/
-│ ├── docker-compose.yml (Web2, Web2, SSH)
-│ └── volumes/
+├── provedor
+│   ├── compose.yaml
+│   ├── dns
+│   │   ├── conf
+│   │   │   ├── db.pipa.com
+│   │   │   └── named.conf.local
+│   │   └── Dockerfile
+│   ├── mail
+│   │   ├── conf
+│   │   │   ├── 10-master.conf
+│   │   │   ├── dovecot.conf
+│   │   │   ├── main.cf
+│   │   │   └── ssl
+│   │   │       └── email.crt
+│   │   ├── data
+│   │   │   ├── felipe
+│   │   │   └── rafael 
+│   │   ├── Dockerfile
+│   │   ├── init.sh
+│   │   └── ssl
+│   ├── proxy
+│   │   ├── conf
+│   │   │   ├── default.conf
+│   │   │   ├── nginx.conf
+│   │   │   └── ssl
+│   │   │       ├── certificado.crt
+│   │   │       └── certificado.key
+│   │   ├── dockerfile
+│   │   └── html
+│   │       └── index.html
+│   ├── ssh
+│   │   └── Dockerfile
+│   └── webmail
+│       ├── conf
+│       │   └── config.inc.php
+│       └── Dockerfile
 └── README.md
 ```
 
@@ -81,23 +107,25 @@ Projeto_ASA
     ```bash
     # Provedor
     cd provedor
-    docker-compose up -d
+    docker compose up -d --build
 
     # Cliente 1
     cd ../cliente1
-    docker-compose up -d
+    docker compose up -d --build
 
     # Cliente 2
     cd ../cliente2
-    docker-compose up -d
+    docker compose up -d --build
     ```
 3. **Acesse os serviços**:
     ```
-    º Web: https://pipa.asa.br (via proxy)
+    º Web: https://proxy.pipa.com
+   (via proxy)
 
-    º Webmail: https://webmail.pipa.asa.br
+    º Webmail: https://webmail.pipa.com
+  
 
-    º SSH: ssh usuario@ip_do_servidor -p 22
+    º SSH: Porta 22
     ```
 ---
 ## 📊 Critérios de Avaliação
@@ -119,3 +147,13 @@ Projeto_ASA
 4. **Testes básicos de conectividade e acesso.**
 
 5. **Demonstração do conhecimento em Docker e redes.**
+
+---
+##  ⚠️ Outras informações:
+
+    Criação de usuários e script .sh foram retirados de : https://github.com/Pikelot.
+
+    Falta encontrar uma forma de manter os usuários após criação.
+
+    Não sei se o SSH está implementado da forma esperada. 
+

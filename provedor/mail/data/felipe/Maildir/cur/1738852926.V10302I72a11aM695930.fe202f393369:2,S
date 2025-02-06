@@ -1,0 +1,72 @@
+Return-Path: <>
+X-Original-To: felipe@pipa.com
+Delivered-To: felipe@pipa.com
+Received: by mail.pipa.com (Postfix)
+	id A93D6E8A7AF; Thu,  6 Feb 2025 14:42:06 +0000 (UTC)
+Date: Thu,  6 Feb 2025 14:42:06 +0000 (UTC)
+From: Mail Delivery System <MAILER-DAEMON@mail.pipa.com>
+Subject: Successful Mail Delivery Report
+To: felipe@pipa.com
+Auto-Submitted: auto-replied
+MIME-Version: 1.0
+Content-Type: multipart/report; report-type=delivery-status;
+	boundary="96941E8A7AA.1738852926/mail.pipa.com"
+Content-Transfer-Encoding: 8bit
+Message-Id: <20250206144206.A93D6E8A7AF@mail.pipa.com>
+
+This is a MIME-encapsulated message.
+
+--96941E8A7AA.1738852926/mail.pipa.com
+Content-Description: Notification
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+This is the mail system at host mail.pipa.com.
+
+Your message was successfully delivered to the destination(s)
+listed below. If the message was delivered to mailbox you will
+receive no further notifications. Otherwise you may still receive
+notifications of mail delivery errors from other systems.
+
+                   The mail system
+
+<rafael@pipa.com>: delivery via local: delivered to maildir
+
+--96941E8A7AA.1738852926/mail.pipa.com
+Content-Description: Delivery report
+Content-Type: message/delivery-status
+
+Reporting-MTA: dns; mail.pipa.com
+X-Postfix-Queue-ID: 96941E8A7AA
+X-Postfix-Sender: rfc822; felipe@pipa.com
+Arrival-Date: Thu,  6 Feb 2025 14:42:06 +0000 (UTC)
+
+Final-Recipient: rfc822; rafael@pipa.com
+Original-Recipient: rfc822;rafael@pipa.com
+Action: delivered
+Status: 2.0.0
+Diagnostic-Code: X-Postfix; delivery via local: delivered to maildir
+
+--96941E8A7AA.1738852926/mail.pipa.com
+Content-Description: Message Headers
+Content-Type: text/rfc822-headers
+Content-Transfer-Encoding: 8bit
+
+Return-Path: <felipe@pipa.com>
+Received: from webmail.pipa.com (webmail.provedor_praia-net [172.22.0.6])
+	(Authenticated sender: felipe)
+	by mail.pipa.com (Postfix) with ESMTPSA id 96941E8A7AA
+	for <rafael@pipa.com>; Thu,  6 Feb 2025 14:42:06 +0000 (UTC)
+MIME-Version: 1.0
+Date: Thu, 06 Feb 2025 11:42:06 -0300
+From: felipe <felipe@pipa.com>
+To: rafael@pipa.com
+Subject: teste de email
+Message-ID: <a6d3ba32780a55af05b841e711ae8ec7@pipa.com>
+X-Sender: felipe@pipa.com
+Disposition-Notification-To: felipe <felipe@pipa.com>
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
+
+--96941E8A7AA.1738852926/mail.pipa.com--
