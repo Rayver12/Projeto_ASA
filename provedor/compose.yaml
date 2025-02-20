@@ -13,6 +13,7 @@ services:
     volumes:
       - ./dns/conf/db.pipa.com:/etc/bind/db.pipa.com
       - ./dns/conf/named.conf.local:/etc/bind/named.conf.local
+      - ./dns/conf/db.pitangui.com:/etc/bind/db.pitangui.com
     
   proxy:
     build:
@@ -29,6 +30,7 @@ services:
       - webmail
     networks:
       - praia-net
+      - praia-net-proxy
     volumes:
       - ./proxy/conf/default.conf:/etc/nginx/conf.d/default.conf
       - ./proxy/conf/nginx.conf:/etc/nginx/nginx.conf
@@ -82,3 +84,5 @@ services:
 networks:
   praia-net:
     driver: bridge
+  praia-net-proxy:
+    external: true

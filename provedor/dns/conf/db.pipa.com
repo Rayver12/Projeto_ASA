@@ -13,10 +13,10 @@ $TTL	604800
 ;
 @	IN	NS	ns.pipa.com.
 @	IN	MX	10	mail.pipa.com.
-@	IN	A	192.168.1.108
+@	IN	A	10.24.20.38
 
-ns      IN  A   192.168.1.108
-mail    IN  A   192.168.1.108
-webmail IN  A   192.168.1.108
-www     IN  A   192.168.1.108
+ns      IN  A   10.24.20.38
+mail    IN  A   10.24.20.38
+webmail IN  A   10.24.20.38
+www     IN  A   10.24.20.38
 proxy   IN  CNAME www

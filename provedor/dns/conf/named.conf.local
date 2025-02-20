@@ -12,3 +12,10 @@ zone "pipa.com"{
     file "/etc/bind/db.pipa.com";
     allow-transfer{ any; };
 };
+
+zone "pitangui.com"{
+    type master;
+    file "/etc/bind/db.pitangui.com";
+    allow-transfer{ any; };
+};
+
