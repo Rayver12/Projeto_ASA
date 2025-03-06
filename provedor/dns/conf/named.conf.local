@@ -9,13 +9,19 @@
 
 zone "pipa.com"{
     type master;
-    file "/etc/bind/db.pipa.com";
+    file "/etc/bind/zonas/db.pipa.com";
     allow-transfer{ any; };
 };
 
 zone "pitangui.com"{
     type master;
-    file "/etc/bind/db.pitangui.com";
+    file "/etc/bind/zonas/db.pitangui.com";
+    allow-transfer{ any; };
+};
+
+zone "pontanegra.com"{
+    type master;
+    file "/etc/bind/zonas/db.pontanegra.com";
     allow-transfer{ any; };
 };
 

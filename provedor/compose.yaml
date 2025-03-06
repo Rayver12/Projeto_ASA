@@ -11,9 +11,10 @@ services:
     networks:
       - praia-net
     volumes:
-      - ./dns/conf/db.pipa.com:/etc/bind/db.pipa.com
       - ./dns/conf/named.conf.local:/etc/bind/named.conf.local
-      - ./dns/conf/db.pitangui.com:/etc/bind/db.pitangui.com
+      - ./dns/conf/db.pipa.com:/etc/bind/zonas/db.pipa.com
+      - ./dns/conf/db.pitangui.com:/etc/bind/zonas/db.pitangui.com
+      - ./dns/conf/db.pontanegra.com:/etc/bind/zonas/db.pontanegra.com
     
   proxy:
     build:
@@ -35,6 +36,8 @@ services:
       - ./proxy/conf/default.conf:/etc/nginx/conf.d/default.conf
       - ./proxy/conf/nginx.conf:/etc/nginx/nginx.conf
       - ./proxy/conf/ssl:/etc/nginx/ssl
+      - ./proxy/conf/clientes_conf/pitangui.conf:/etc/nginx/conf.d/pitangui.conf
+      - ./proxy/conf/clientes_conf/pontanegra.conf:/etc/nginx/conf.d/pontanegra.conf
   
   email:
     build:
@@ -84,5 +87,6 @@ services:
 networks:
   praia-net:
     driver: bridge
+      #criar esse praia-net-proxy com "docker network create praia-net-proxy"
   praia-net-proxy:
     external: true

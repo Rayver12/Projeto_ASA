@@ -4,6 +4,7 @@ RUN apt update -y
 RUN apt upgrade -y
 RUN apt install vim net-tools -y
 RUN apt install bind9 dnsutils -y
+RUN mkdir /etc/bind/zonas
 
 EXPOSE 53/tcp
 EXPOSE 53/udp

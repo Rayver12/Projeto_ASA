@@ -1,71 +1,70 @@
 services:    
-  db-client1:
+  db-ponta:
     image: mariadb:latest
-    container_name: db-client1
+    container_name: db-ponta
     environment:
       MYSQL_ROOT_PASSWORD: rootpass
-      MYSQL_DATABASE: wordpress-pit
+      MYSQL_DATABASE: wordpress-ponta
       MYSQL_USER: wpuser
       MYSQL_PASSWORD: wppass
     networks:
       - praia-net
     volumes:
-      - db-client1_data:/var/lib/mysql
-        
-  wordpress-pit:
-    image: wordpress:latest
-    container_name: wordpress-pit
-    depends_on:
-      - db-client1
-    restart: always
-    tty: true
-    environment:
-      WORDPRESS_DB_HOST: db-client1
-      WORDPRESS_DB_USER: wpuser
-      WORDPRESS_DB_PASSWORD: wppass
-      WORDPRESS_DB_NAME: wordpress-pit
-    networks:
-      - praia-net 
-      - praia-net-proxy
-    volumes:
-      - wordpress-pit_data:/var/www/html
+      - db-client2_data:/var/lib/mysql
 
-  wordpress-pit-2:
+  wordpress-ponta:
     image: wordpress:latest
-    container_name: wordpress-pit-2
+    container_name: wordpress-ponta
     depends_on:
-      - db-client1
+      - db-ponta
     restart: always
     tty: true
     environment:
-      WORDPRESS_DB_HOST: db-client1
+      WORDPRESS_DB_HOST: db-ponta
       WORDPRESS_DB_USER: wpuser
       WORDPRESS_DB_PASSWORD: wppass
-      WORDPRESS_DB_NAME: wordpress-pit
+      WORDPRESS_DB_NAME: wordpress-ponta
     networks:
       - praia-net
       - praia-net-proxy
     volumes:
-      - wordpress-pit_data:/var/www/html
+      - wordpress-ponta_data:/var/www/html
 
+  wordpress-ponta-2:
+    image: wordpress:latest
+    container_name: wordpress-ponta-2
+    depends_on:
+      - db-ponta
+    restart: always
+    tty: true
+    environment:
+      WORDPRESS_DB_HOST: db-ponta
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: wppass
+      WORDPRESS_DB_NAME: wordpress-ponta
+    networks:
+      - praia-net
+      - praia-net-proxy
+    volumes:
+      - wordpress-ponta_data:/var/www/html
   ssh:
     build:
       context: ./ssh
       dockerfile: Dockerfile
     image: ssh
-    container_name: ssh-pitangui
+    container_name: ssh-ponta
     ports:
-      - "2222:22"
+      - "4444:22"
     networks:
       - praia-net
 
 volumes:
-  db-client1_data:
-  wordpress-pit_data:
+  db-client2_data:
+  wordpress-ponta_data:
 
 networks:
   praia-net:
     driver: bridge
-      # Rede para comunicação com o proxy geral
+  # Rede para comunicação com o proxy geral
   praia-net-proxy:
     external: true
