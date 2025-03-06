@@ -7,7 +7,7 @@
 
 ## 📋 Descrição do Projeto
 
-O **ASA-CLOUD** é uma infraestrutura como código (IaC) que replica os principais serviços de um provedor de internet, organizada em três `compose.yaml`:
+O **ASA-CLOUD** é uma infraestrutura como código (IaC) que replica os principais serviços de um provedor de internet, organizada em três `compose.yml`:
 
 1. **Provedor**: Serviços base (DNS, Proxy, E-mail, WebMail, SSH).
 2. **Cliente 1**: Hospedagem web personalizada, SSH, Proxy.
@@ -17,7 +17,7 @@ O **ASA-CLOUD** é uma infraestrutura como código (IaC) que replica os principa
 
 ---
 
-## 🛠 Componentes da Solução º Client1: https://web.pitangui.com
+## 🛠 Componentes da Solução
 
 | Serviço           | Tecnologia      | Descrição                                           |
 | ----------------- | --------------- | --------------------------------------------------- |
@@ -57,19 +57,32 @@ O **ASA-CLOUD** é uma infraestrutura como código (IaC) que replica os principa
 
 ```
 Projeto_ASA
-├── cliente1
-│   ├── compose.yaml
-│   └── ssh
-│       └── Dockerfile
-├── init.sh
+
+├── clientes
+│   ├── pitangui
+│   │   ├── compose.yml
+│   │   └── ssh
+│   │       └── Dockerfile
+│   └── pontanegra
+│       ├── compose.yml
+│       └── ssh
+│           └── Dockerfile
+│
+├── iniciar.sh
+│
+├── LICENSE
+│
 ├── provedor
-│   ├── compose.yaml
+│   │
+│   ├── compose.yml
 │   ├── dns
 │   │   ├── conf
 │   │   │   ├── db.pipa.com
 │   │   │   ├── db.pitangui.com
+│   │   │   ├── db.pontanegra.com
 │   │   │   └── named.conf.local
 │   │   └── Dockerfile
+│   │
 │   ├── mail
 │   │   ├── conf
 │   │   │   ├── 10-master.conf
@@ -80,8 +93,12 @@ Projeto_ASA
 │   │   │   └── rafael
 │   │   ├── Dockerfile
 │   │   └── init.sh
+│   │
 │   ├── proxy
 │   │   ├── conf
+│   │   │   ├── clientes_conf
+│   │   │   │   ├── pitangui.conf
+│   │   │   │   └── pontanegra.conf
 │   │   │   ├── default.conf
 │   │   │   ├── nginx.conf
 │   │   │   └── ssl
@@ -90,12 +107,15 @@ Projeto_ASA
 │   │   ├── dockerfile
 │   │   └── html
 │   │       └── index.html
+│   │
 │   ├── ssh
 │   │   └── Dockerfile
+│   │
 │   └── webmail
 │       ├── conf
 │       │   └── config.inc.php
 │       └── Dockerfile
+│
 └── README.md
 
 ```
@@ -121,18 +141,18 @@ Projeto_ASA
    docker compose up -d --build
 
    # Cliente 1
-   cd ../cliente1
+   cd ../clientes/pitangui
    docker compose up -d --build
 
    # Cliente 2
-   cd ../cliente2
+   cd ../pontanegra
    docker compose up -d --build
    ```
 
    Ou execute o script para iniciar todos ao mesmo tempo:
 
    ```
-   iniciar.sh
+   ./iniciar.sh start/stop
    ```
 
 4. **Acesse os serviços**:
@@ -144,6 +164,8 @@ Projeto_ASA
    º Webmail: https://webmail.pipa.com
 
    º Client1: https://web.pitangui.com
+
+   º Client2: https://web.pontanegra.com
 
    º SSH: Porta 22
    ```
@@ -176,12 +198,10 @@ Projeto_ASA
 
 ## ⚠️ Outras informações:
 
-    Criação de usuários e script .sh foram retirados de : https://github.com/Pikelot.
+    Criação de usuários e script init.sh foram retirados de : https://github.com/Pikelot.
 
     Falta encontrar uma forma de manter os usuários após criação.
 
     Não sei se o SSH está implementado da forma esperada.
-
-    Falta modificar o iniciar.sh para aceitar comando de iniciar e desligar
 
     Por dificuldades com portas e redirecionamento, achei melhor manter todos no mesmo container DNS e PROXY
