@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ $1 == "start" ]]; then
-    # Check if network exists, create if not
+    # Checa se a rede praia-net-proxy existe e cria caso não exista.
     if ! docker network inspect praia-net-proxy >/dev/null 2>&1; then
         echo "Creating praia-net-proxy network..."
         docker network create praia-net-proxy
